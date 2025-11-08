@@ -68,6 +68,12 @@ static Key keys[] = {
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
 	TAGKEYS(                        XK_5,                      4)
+	TAGKEYS(                        XK_1,                      5)
+	TAGKEYS(                        XK_2,                      6)
+	TAGKEYS(                        XK_3,                      7)
+	TAGKEYS(                        XK_4,                      8)
+	TAGKEYS(                        XK_5,                      9)
+    TAGKEYS(                        XK_5,                      10)
 };
 
 static Button buttons[] = {
