@@ -53,6 +53,56 @@ static const char *roficmd[]  = { "rofi", "-show", "drun", NULL };
 
 static void safeKillClient(const Arg *arg);
 
+/* Mover foco con flechas (tipo BSPWM) */
+void
+focusdir(const Arg *arg) {
+    Client *c = NULL, *best = NULL;
+    int distance = 0x7fffffff;
+
+    if (!selmon->sel)
+        return;
+
+    for (c = selmon->clients; c; c = c->next) {
+        if (!ISVISIBLE(c) || c == selmon->sel)
+            continue;
+
+        int dx = c->x - selmon->sel->x;
+        int dy = c->y - selmon->sel->y;
+
+        switch (arg->i) {
+        case 0: // Left
+            if (dx < 0 && abs(dy) < selmon->sel->h && abs(dx) < distance) { best = c; distance = abs(dx); }
+            break;
+        case 1: // Down
+            if (dy > 0 && abs(dx) < selmon->sel->w && abs(dy) < distance) { best = c; distance = abs(dy); }
+            break;
+        case 2: // Up
+            if (dy < 0 && abs(dx) < selmon->sel->w && abs(dy) < distance) { best = c; distance = abs(dy); }
+            break;
+        case 3: // Right
+            if (dx > 0 && abs(dy) < selmon->sel->h && abs(dx) < distance) { best = c; distance = abs(dx); }
+            break;
+        }
+    }
+
+    if (best)
+        focus(best);
+}
+
+void
+shiftview(const Arg *arg) {
+    Arg shifted;
+    unsigned int tagset = selmon->tagset[selmon->seltags];
+
+    if (arg->i > 0) // siguiente tag
+        shifted.ui = (tagset << arg->i) | (tagset >> (LENGTH(tags) - arg->i));
+    else // tag anterior
+        shifted.ui = (tagset >> (-arg->i)) | (tagset << (LENGTH(tags) + arg->i));
+
+    view(&shifted);
+}
+
+
 static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_space,      spawn,          {.v = roficmd } },
@@ -68,12 +118,17 @@ static Key keys[] = {
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
 	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_1,                      5)
-	TAGKEYS(                        XK_2,                      6)
-	TAGKEYS(                        XK_3,                      7)
-	TAGKEYS(                        XK_4,                      8)
-	TAGKEYS(                        XK_5,                      9)
-    TAGKEYS(                        XK_5,                      10)
+	TAGKEYS(                        XK_6,                      5)
+	TAGKEYS(                        XK_7,                      6)
+	TAGKEYS(                        XK_8,                      7)
+	TAGKEYS(                        XK_9,                      8)
+	TAGKEYS(                        XK_0,                      10)
+  { MODKEY,                       XK_Left,  focusdir,       {.i = 0 } }, /* oeste */
+	{ MODKEY,                       XK_Down,  focusdir,       {.i = 1 } }, /* sur */
+	{ MODKEY,                       XK_Up,    focusdir,       {.i = 2 } }, /* norte */
+	{ MODKEY,                       XK_Right, focusdir,       {.i = 3 } }, /* este */
+  { MODKEY|Mod1Mask,              XK_Left,   shiftview,      {.i = -1 } },
+  { MODKEY|Mod1Mask,              XK_Right,  shiftview,      {.i = +1 } },
 };
 
 static Button buttons[] = {
