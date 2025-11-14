@@ -1,6 +1,6 @@
 static const unsigned int borderpx  = 0;
 static const unsigned int snap      = 32;
-static const int showbar            = 1;
+static const int showbar            = 0;
 static const int topbar             = 1;
 static const int focusonwheel       = 0;
 static const int lockfullscreen     = 1;
@@ -106,7 +106,7 @@ shiftview(const Arg *arg) {
 static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_space,      spawn,          {.v = roficmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,                       XK_p,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
