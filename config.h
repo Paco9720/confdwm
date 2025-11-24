@@ -1,5 +1,5 @@
 static const unsigned int borderpx  = 0;
-static const unsigned int snap      = 0;
+static const unsigned int snap      = 32;
 static const int showbar            = 1;
 static const int topbar             = 1;
 static const int focusonwheel       = 0;
