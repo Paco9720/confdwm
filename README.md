@@ -2,14 +2,14 @@ git clone https://git.suckless.org/dwm
 --------
 Depencies many distros
 ```
-sudo apt install build-essential libx11-dev libxft-dev libxinerama-dev xinit xorg ninja-build cmake makesd
+sudo apt install build-essential libX11-dev libXft-dev libXinerama-dev Xinit Xorg ninja-build cmake makesd
 ```
 ```
-sudo dnf in libx11-devel libxft-deve libxinerama-devel
+sudo dnf in libX11-devel libXft-deve libXinerama-devel
 ```
 ```
-sudo zypper in libx11-devel libxft-deve libxinerama-devel
+sudo zypper in libX11-devel libXft-deve libXinerama-devel
 ```
 ```
-sudo pacman -S libx11-dev libxft-dev libxinerama-dev
+sudo pacman -S libX11-dev libXft-dev libXinerama-dev
 ```
