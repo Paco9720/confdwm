@@ -1,8 +1,6 @@
 git clone https://git.suckless.org/dwm
 --------
-```
-debian dependences
-```
+Depencies many distros
 ```
 sudo apt install build-essential libx11-dev libxft-dev libxinerama-dev xinit xorg ninja-build cmake makesd
 ```
